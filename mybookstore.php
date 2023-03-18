@@ -17,7 +17,7 @@
         $stmt = mysqli_query($connection,$query);
 
         while($row = mysqli_fetch_array($stmt,MYSQLI_ASSOC)){
-            echo $row['author_fname']." ".$row['author_lname'].'</br>';
+            echo $row['author_fname'].'</br>';
         }
      ?>
 </body>
