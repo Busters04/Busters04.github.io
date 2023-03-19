@@ -62,52 +62,46 @@
 
 <h2>Queries</h2>
 
-
-<fieldset>
-  <legend>Contact Form</legend>
-  <form name="frmContact" method="post" action="https://2d93-192-145-119-113.ngrok.io/mybookstore/mybookstore.php">
-  <p>
-  <label for="Name">Name </label>
-  <input type="text" name="txtName" id="txtName">
-  </p>
-  <p>
-  <label for="email">Email</label>
-  <input type="text" name="txtEmail" id="txtEmail">
-  </p>
-  <p>
-  <label for="phone">Phone</label>
-  <input type="text" name="txtPhone" id="txtPhone">
-  </p>
-  <p>
-  <label for="message">Message</label>
-  <textarea name="txtMessage" id="txtMessage"></textarea>
-  </p>
-  <p>&nbsp;</p>
-  <p>
-  <input type="submit" name="Submit" id="Submit" value="Submit">
-  </p>
-  </form>
-</fieldset>
-
-
-<p>Suggestions: <span id="txtHint"></span></p> 
-<p>First name: <input type="text" id="txt1" onkeyup="showHint(this.value)"></p>
-
+<head>
 <script>
-function showHint(str) {
-  if (str.length == 0) { 
+function showUser(str) {
+  if (str == "") {
     document.getElementById("txtHint").innerHTML = "";
     return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    if (str == 1) {
+      xmlhttp.open("GET","https://2d93-192-145-119-113.ngrok.io/mybookstore/Authors.php?q="+str,true);
+      xmlhttp.send();
+    } else if (str == 2) {
+      xmlhttp.open("GET","https://2d93-192-145-119-113.ngrok.io/mybookstore/Books.php?q="+str,true);
+      xmlhttp.send();
+    }
   }
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-    document.getElementById("txtHint").innerHTML =
-    this.responseText;
-  }
-  xhttp.open("GET", "mybookstore.php?q="+str);
-  xhttp.send();   
 }
 </script>
+</head>
+<body>
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Select a Query:</option>
+  <option value="1">All Authors</option>
+  <option value="2">All Books</option>
+  <option value="3">Joseph Swanson</option>
+  <option value="4">Glenn Quagmire</option>
+  </select>
+</form>
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+
+</body>
+</html>
 
 <!--
 <button type="button" onclick="loadDoc('Hello World.html', myFunction)">Change Content
