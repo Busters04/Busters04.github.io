@@ -75,7 +75,7 @@ function showUser(str) {
       //}
     };
     if (str == 1) {
-      xmlhttp.open("POST","https://592a-192-145-119-60.ngrok.io/mybookstore/Authors.php?q="+str,true);
+      xmlhttp.open("REQUEST","https://592a-192-145-119-60.ngrok.io/mybookstore/Authors.php?q="+str,true);
       xmlhttp.send();
     } else if (str == 2) {
       xmlhttp.open("GET","https://592a-192-145-119-60.ngrok.io/mybookstore/Books.php?q="+str,true);
