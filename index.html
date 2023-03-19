@@ -70,10 +70,10 @@ function showUser(str) {
     return;
   } else {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
+    xmlhttp.onload/*readystatechange*/ = function() {
+      //if (this.readyState == 4 && this.status == 200) {
         document.getElementById("txtHint").innerHTML = this.responseText;
-      }
+      //}
     };
     if (str == 1) {
       xmlhttp.open("GET","https://2d93-192-145-119-113.ngrok.io/mybookstore/Authors.php?q="+str,true);
