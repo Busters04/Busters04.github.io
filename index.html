@@ -56,46 +56,6 @@
     </button>-->
   </header>
 
-<h2>Queries</h2>
-
-<form name="frmContact" method="post" action="https://592a-192-145-119-60.ngrok.io/mybookstore/mybookstore.php">
-  <select name="users" onchange="showUser(this.value)">
-    <option value="">Select a Query:</option>
-    <option value="1">All Authors</option>
-    <option value="2">All Books</option>
-    <option value="3">Joseph Swanson</option>
-    <option value="4">Glenn Quagmire</option>
-    </select>
-  </form>
-  <br>
-  <div id="txtHint"><b>Person info will be listed here...</b></div>
-
-<head>
-<script type="text/javascript">
-function showUser(str) {
-  if (str == "") {
-    document.getElementById("txtHint").innerHTML = "";
-    return;
-  } else {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload/*readystatechange*/ = function() {
-      //if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("txtHint").innerHTML = this.responseText;
-      //}
-    };
-    if (str == 1) {
-      xmlhttp.open("REQUEST","https://592a-192-145-119-60.ngrok.io/mybookstore/Authors.php?q="+str,true);
-      xmlhttp.send();
-    } else if (str == 2) {
-      xmlhttp.open("GET","https://592a-192-145-119-60.ngrok.io/mybookstore/Books.php?q="+str,true);
-      xmlhttp.send();
-    }
-  }
-}
-</script>
-</head>
-</body>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Contact Form - PHP/MySQL Demo Code</title>
