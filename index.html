@@ -70,16 +70,16 @@
 </form>
 </fieldset>
 
-<!--<div id="txtHint">
+<div id="txtHint">
   <h2>The XMLHttpRequest Object</h2>
   <button type="button" onclick="loadDoc()">Change Content</button>
 
 <script>
   function loadDoc(str) {
-    if (str == "") {
-      document.getElementById("txtHint").innerHTML = "";
-      return;
-    }
+    //if (str == "") {
+      //document.getElementById("txtHint").innerHTML = "";
+      //return;
+    //}
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
       document.getElementById("txtHint").innerHTML = this.responseText;
