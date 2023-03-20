@@ -58,7 +58,7 @@
 
 <h2>Queries</h2>
 
-<form>
+<form name="frmContact" method="post" action="http://localhost/mybookstore/mybookstore.php">
   <select name="users" onchange="showUser(this.value)">
     <option value="">Select a Query:</option>
     <option value="1">All Authors</option>
@@ -83,13 +83,13 @@ function showUser(str) {
         document.getElementById("txtHint").innerHTML = this.responseText;
       //}
     };
-    //if (str == 1) {
+    if (str == 1) {
       xmlhttp.open("REQUEST","https://592a-192-145-119-60.ngrok.io/mybookstore/Authors.php?q="+str,true);
       xmlhttp.send();
-    //} else if (str == 2) {
-      //xmlhttp.open("GET","https://592a-192-145-119-60.ngrok.io/mybookstore/Books.php?q="+str,true);
-      //xmlhttp.send();
-    //}
+    } else if (str == 2) {
+      xmlhttp.open("GET","https://592a-192-145-119-60.ngrok.io/mybookstore/Books.php?q="+str,true);
+      xmlhttp.send();
+    }
   }
 }
 </script>
