@@ -84,7 +84,7 @@
     xhttp.onload = function() {
       document.getElementById("txtHint").innerHTML = this.responseText;
     }
-    xhttp.open("GET", "getcustomer.php?q="+str);
+    xhttp.open("POST", "https://592a-192-145-119-60.ngrok.io/mybookstore/index.html?q="+str);
     xhttp.send();
   }
  </script>
