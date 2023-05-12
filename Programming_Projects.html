@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        body {  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            min-height: 100vh;
+        }
+        .loading {  
+            max-width: 50%;  
+            line-height: 1.4;  
+            font-size: 1.2rem;  
+            font-weight: bold;  
+            text-align: center;
+        }
+        .loading__author {  
+            font-weight: normal;  
+            font-size: 0.9rem;  
+            color: rgba(189,189,189, 1);  
+            margin: 0.6rem 0 2rem 0;  
+            display: block;
+        }
+        .loading__anim {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            border: 5px solid rgba(189,189,189, 0.25);
+            border-left-color: rgba(3,155,229, 1);
+            border-top-color: rgb(3,155,229, 1);
+            border-radius: 50%;
+            animation: rotate 600ms infinite linear;
+        }
+        @keyframes rotate {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+        </style>
+    </head>
+
+    <body onload="myFunction()" style="margin:0;">
+
+        <section id="loader" class="loading">
+            Don't ponder what was lost, but strive for what can be found
+            <span class="loading__author"> - Eli Kaustinen</span>   
+            <span class="loading__anim"></span>
+        </section>
+
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+            <h2>Hello!</h2>
+            <p>This is my programming page!</p>
+          </div>
+        
+        <script>
+        var myVar;
+        
+        function myFunction() {
+          myVar = setTimeout(showPage, 3000);
+        }
+        
+        function showPage() {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        </script>
+        
+    </body>
+</html>
