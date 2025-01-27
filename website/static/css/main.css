@@ -1,0 +1,27 @@
+/* main.css */
+
+/* Simple example of some basic styling overrides */
+body {
+    background-color: #f9f9f9;
+}
+
+h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: 600;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #0d6efd !important; /* Bootstrap primary color */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn {
+    border-radius: 0;
+}

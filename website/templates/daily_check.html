@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Daily Check{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h2 class="text-center">Daily Check</h2>
+    <p>Select which sub-goals you completed today:</p>
+    <form method="POST">
+      
+      <!-- Spiritual Goals -->
+      <h4>Spiritual Goals</h4>
+      {% if spiritual_goals %}
+        <ul class="list-group mb-3">
+          {% for goal in spiritual_goals %}
+            <li class="list-group-item">
+              <strong>{{ goal.name }}</strong>
+              {% if goal.sub_goals and goal.sub_goals|length > 0 %}
+                <ul class="list-unstyled ms-3 mt-2">
+                  {% for sub_goal in goal.sub_goals %}
+                    {% set key = (goal._id|string, loop.index0) %}
+                    {% set count = completion_counts.get(key, 0) %}
+                    {% set dpw = sub_goal.days_per_week if sub_goal.days_per_week else 0 %}
+                    <li class="mb-1">
+                      <input type="checkbox" 
+                             name="completed_subgoals" 
+                             value="{{ goal._id }}__{{ loop.index0 }}">
+                      <em>
+                        {{ sub_goal.description }}
+                        <!-- Show (count/dpw), handle dpw=0 gracefully -->
+                        {% if dpw > 0 %}
+                          ({{ count }}/{{ dpw }})
+                        {% else %}
+                          ({{ count }}/-)
+                        {% endif %}
+                      </em>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="mt-2">No sub-goals for this goal.</div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No spiritual goals added yet.</p>
+      {% endif %}
+
+      <!-- Mental Goals -->
+      <h4>Mental Goals</h4>
+      {% if mental_goals %}
+        <ul class="list-group mb-3">
+          {% for goal in mental_goals %}
+            <li class="list-group-item">
+              <strong>{{ goal.name }}</strong>
+              {% if goal.sub_goals and goal.sub_goals|length > 0 %}
+                <ul class="list-unstyled ms-3 mt-2">
+                  {% for sub_goal in goal.sub_goals %}
+                    {% set key = (goal._id|string, loop.index0) %}
+                    {% set count = completion_counts.get(key, 0) %}
+                    {% set dpw = sub_goal.days_per_week if sub_goal.days_per_week else 0 %}
+                    <li class="mb-1">
+                      <input type="checkbox" 
+                             name="completed_subgoals" 
+                             value="{{ goal._id }}__{{ loop.index0 }}">
+                      <em>
+                        {{ sub_goal.description }}
+                        {% if dpw > 0 %}
+                          ({{ count }}/{{ dpw }})
+                        {% else %}
+                          ({{ count }}/-)
+                        {% endif %}
+                      </em>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="mt-2">No sub-goals for this goal.</div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No mental goals added yet.</p>
+      {% endif %}
+
+      <!-- Physical Goals -->
+      <h4>Physical Goals</h4>
+      {% if physical_goals %}
+        <ul class="list-group mb-3">
+          {% for goal in physical_goals %}
+            <li class="list-group-item">
+              <strong>{{ goal.name }}</strong>
+              {% if goal.sub_goals and goal.sub_goals|length > 0 %}
+                <ul class="list-unstyled ms-3 mt-2">
+                  {% for sub_goal in goal.sub_goals %}
+                    {% set key = (goal._id|string, loop.index0) %}
+                    {% set count = completion_counts.get(key, 0) %}
+                    {% set dpw = sub_goal.days_per_week if sub_goal.days_per_week else 0 %}
+                    <li class="mb-1">
+                      <input type="checkbox" 
+                             name="completed_subgoals" 
+                             value="{{ goal._id }}__{{ loop.index0 }}">
+                      <em>
+                        {{ sub_goal.description }}
+                        {% if dpw > 0 %}
+                          ({{ count }}/{{ dpw }})
+                        {% else %}
+                          ({{ count }}/-)
+                        {% endif %}
+                      </em>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="mt-2">No sub-goals for this goal.</div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No physical goals added yet.</p>
+      {% endif %}
+
+      <button type="submit" class="btn btn-success">Submit Daily Check</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

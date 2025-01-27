@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Manage {{ category|capitalize }} Goals{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h2 class="mb-4 text-center">{{ category|capitalize }} Goals</h2>
+
+    <!-- Existing goals list -->
+    <ul class="list-group mb-4">
+      {% if goals %}
+        {% for goal in goals %}
+          <li class="list-group-item">
+            <strong>{{ goal.name }}</strong>
+            <br/>
+            <em>Start Date:</em>
+            {% if goal.start_date %}
+              {{ goal.start_date.strftime('%Y-%m-%d') }}
+            {% else %}
+              N/A
+            {% endif %}
+
+            <br/>
+            <em>Completed?</em> {{ 'Yes' if goal.is_completed else 'No' }}
+
+            <!-- Edit button -->
+            <a href="{{ url_for('views.edit_goal', category=category, goal_id=goal._id) }}"
+               class="btn btn-sm btn-secondary float-end">
+               Edit
+            </a>
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="list-group-item">No goals yet!</li>
+      {% endif %}
+    </ul>
+
+
+    <!-- Form to create NEW main goal + sub goals -->
+    <h4>Add a New {{ category|capitalize }} Goal</h4>
+    <form method="POST" action="{{ url_for('views.manage_goals', category=category) }}">
+      <div class="mb-3">
+        <label for="goal_name" class="form-label">Goal Name</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="goal_name" 
+          name="goal_name" 
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="start_date" class="form-label">Start Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="start_date"
+          name="start_date"
+        >
+      </div>
+
+      <hr/>
+      <h5>Sub Goals</h5>
+
+      <!-- Sub-Goal Container -->
+      <div id="sub-goal-container">
+        <!-- One sub-goal row by default -->
+        <div class="sub-goal-row mb-3">
+          <label>Description</label>
+          <input 
+            type="text" 
+            class="form-control mb-2" 
+            name="sub_goal_description[]" 
+            placeholder="Sub Goal Description"
+          >
+
+          <label>Days/Week</label>
+          <input 
+            type="number" 
+            class="form-control mb-2" 
+            name="sub_goal_days_per_week[]" 
+            min="0" max="7"
+          >
+
+          <label>Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            name="sub_goal_start_date[]"
+          >
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-outline-primary btn-sm mb-3" id="add-sub-goal-btn">
+        + Add Another Sub Goal
+      </button>
+
+      <button type="submit" class="btn btn-primary">Create Goal</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
