@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Home - My Goal Tracker{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12 text-center">
+    <h1>Welcome to Your Goal Tracker!</h1>
+    <p>Select a tab to see your daily wins:</p>
+  </div>
+</div>
+
+<!-- Tabs -->
+<ul class="nav nav-tabs justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link {% if not tab or tab == 'spiritual' %}active{% endif %}" 
+       href="{{ url_for('views.spiritual') }}">Spiritual</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if tab == 'mental' %}active{% endif %}" 
+       href="{{ url_for('views.mental') }}">Mental</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if tab == 'physical' %}active{% endif %}" 
+       href="{{ url_for('views.physical') }}">Physical</a>
+  </li>
+</ul>
+
+<!-- Tab Content -->
+<div class="tab-content mt-3">
+
+  <!-- Spiritual Tab -->
+  <div class="tab-pane fade {% if not tab or tab == 'spiritual' %}show active{% endif %}" 
+       id="spiritual" role="tabpanel" aria-labelledby="spiritual-tab">
+    <h3>Spiritual Goals</h3>
+    <p>Track spiritual progress here.</p>
+    <!-- Plus Button to add a new spiritual goal -->
+    <a href="{{ url_for('views.manage_goals', category='spiritual') }}" class="btn btn-success btn-sm">
+      + Add Goal
+    </a>
+  </div>
+
+  <!-- Mental Tab -->
+  <div class="tab-pane fade {% if tab == 'mental' %}show active{% endif %}" 
+       id="mental" role="tabpanel" aria-labelledby="mental-tab">
+    <h3>Mental Goals</h3>
+    <p>Track mental progress here.</p>
+    <!-- Plus Button to add a new mental goal -->
+    <a href="{{ url_for('views.manage_goals', category='mental') }}" class="btn btn-success btn-sm">
+      + Add Goal
+    </a>
+  </div>
+
+  <!-- Physical Tab -->
+  <div class="tab-pane fade {% if tab == 'physical' %}show active{% endif %}" 
+       id="physical" role="tabpanel" aria-labelledby="physical-tab">
+    <h3>Physical Goals</h3>
+    <p>Track physical progress here.</p>
+    <!-- Plus Button to add a new physical goal -->
+    <a href="{{ url_for('views.manage_goals', category='physical') }}" class="btn btn-success btn-sm">
+      + Add Goal
+    </a>
+  </div>
+
+</div>
+
+{% endblock %}
