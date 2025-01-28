@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 
 # MongoDB connection string (replace with your own secure credentials)
-client = MongoClient(os.environ.get("MONGO_URI"))
+client = MongoClient("mongodb+srv://ekaustinen:Chuckles7262@eli-cluster.7nhdz.mongodb.net/")
 
 # Specify the database name
 db = client["3Wins_db"]
